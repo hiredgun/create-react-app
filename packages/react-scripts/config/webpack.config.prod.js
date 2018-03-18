@@ -8,7 +8,8 @@
 // @remove-on-eject-end
 'use strict';
 
-const autoprefixer = require('autoprefixer');
+// const autoprefixer = require('autoprefixer');
+const cssnext = require('postcss-cssnext');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -167,6 +168,13 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+          {
+            test: /\.svg$/,
+            use: [
+              require.resolve('url-loader'),
+              require.resolve('svg-fill-loader'),
+            ],
+          },
           // Process JS with Babel.
           {
             test: /\.(js|jsx|mjs)$/,
@@ -220,15 +228,14 @@ module.exports = {
                         // https://github.com/facebookincubator/create-react-app/issues/2677
                         ident: 'postcss',
                         plugins: () => [
-                          require('postcss-flexbugs-fixes'),
-                          autoprefixer({
+                          require('postcss-import'),
+                          cssnext({
                             browsers: [
                               '>1%',
                               'last 4 versions',
                               'Firefox ESR',
                               'not ie < 9', // React doesn't support IE8 anyway
                             ],
-                            flexbox: 'no-2009',
                           }),
                         ],
                       },
