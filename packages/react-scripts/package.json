@@ -1,14 +1,14 @@
 {
-  "name": "react-scripts",
-  "version": "1.1.0",
+  "name": "@hiredgun/react-scripts",
+  "version": "2.0.0",
   "description": "Configuration and scripts for Create React App.",
-  "repository": "facebook/create-react-app",
+  "repository": "hiredgun/create-react-app",
   "license": "MIT",
   "engines": {
     "node": ">=6"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/hiredgun/create-react-app/issues"
   },
   "files": [
     "bin",
