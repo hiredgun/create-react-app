@@ -184,7 +184,10 @@ module.exports = {
               // @remove-on-eject-begin
               babelrc: false,
               presets: [require.resolve('babel-preset-react-app')],
-              plugins: [require.resolve('babel-plugin-styled-components')],
+              plugins: [
+                require.resolve('babel-plugin-styled-components'),
+                require.resolve('babel-plugin-transform-decorators-legacy'),
+              ],
               // @remove-on-eject-end
               compact: true,
             },
