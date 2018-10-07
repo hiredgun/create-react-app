@@ -88,7 +88,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
                 '>1%',
                 'last 4 versions',
                 'Firefox ESR',
-                'not ie < 9',
+                'not ie < 11',
               ],	                           
             },
             stage: 0,
@@ -225,6 +225,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.mjs', '.web.js', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
+      assets: path.join(paths.appSrc, 'assets'),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -295,13 +296,6 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
-          {
-             test: /\.svg$/,
-            use: [
-              { loader: require.resolve('url-loader')},
-              { loader: require.resolve('svg-fill-loader')},
-            ],
-         },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
           {
@@ -446,6 +440,13 @@ module.exports = {
               'sass-loader'
             ),
           },
+          {
+            test: /\.svg$/,
+           use: [
+             { loader: require.resolve('url-loader')},
+             { loader: require.resolve('svg-fill-loader')},
+           ],
+         },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.
           // This loader doesn't use a "test" so it will catch all modules
