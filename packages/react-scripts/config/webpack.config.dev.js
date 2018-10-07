@@ -59,12 +59,18 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         // https://github.com/facebook/create-react-app/issues/2677
         ident: 'postcss',
         plugins: () => [
+          require('postcss-import'),
           require('postcss-flexbugs-fixes'),
           require('postcss-preset-env')({
             autoprefixer: {
-              flexbox: 'no-2009',
+              browsers: [
+                '>1%',
+                'last 4 versions',
+                'Firefox ESR',
+                'not ie < 11',
+              ],	                           
             },
-            stage: 3,
+            stage: 0,
           }),
         ],
       },
@@ -148,6 +154,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.mjs', '.web.js', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
+      assets: path.join(paths.appSrc, 'assets'),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -343,6 +350,13 @@ module.exports = {
               },
               'sass-loader'
             ),
+          },
+                    {
+             test: /\.svg$/,
+            use: [
+              { loader: require.resolve('url-loader')},
+              { loader: require.resolve('svg-fill-loader')},
+            ],
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.

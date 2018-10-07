@@ -80,12 +80,18 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         // https://github.com/facebook/create-react-app/issues/2677
         ident: 'postcss',
         plugins: () => [
+          require('postcss-import'),
           require('postcss-flexbugs-fixes'),
           require('postcss-preset-env')({
             autoprefixer: {
-              flexbox: 'no-2009',
+              browsers: [
+                '>1%',
+                'last 4 versions',
+                'Firefox ESR',
+                'not ie < 9',
+              ],	                           
             },
-            stage: 3,
+            stage: 0,
           }),
         ],
         sourceMap: shouldUseSourceMap,
@@ -289,6 +295,13 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+          {
+             test: /\.svg$/,
+            use: [
+              { loader: require.resolve('url-loader')},
+              { loader: require.resolve('svg-fill-loader')},
+            ],
+         },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
           {
